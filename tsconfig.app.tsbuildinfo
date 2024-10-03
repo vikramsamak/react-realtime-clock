@@ -1,1 +1,1 @@
-{"root":["./src/app.tsx","./src/realtimeclock.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/constants/formats.ts","./src/constants/timezones.ts","./src/lib/utils.ts","./src/types/formattype.ts","./src/types/timezonetype.ts","./src/types/types.ts"],"version":"5.6.2"}
+{"root":["./src/app.tsx","./src/realtimeclock.tsx","./src/index.ts","./src/main.tsx","./src/vite-env.d.ts","./src/constants/formats.ts","./src/constants/timezones.ts","./src/lib/utils.ts","./src/types/formattype.ts","./src/types/timezonetype.ts","./src/types/types.ts"],"version":"5.6.2"}

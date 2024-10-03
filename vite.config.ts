@@ -15,7 +15,7 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      entry: path.resolve(__dirname, "src/RealTimeClock.tsx"),
+      entry: path.resolve(__dirname, "src/index.ts"),
       name: "ReactRealTimeClock",
       fileName: (format) => `react-realtime-clock.${format}.js`,
     },
