@@ -11,11 +11,13 @@ export default defineConfig({
       fileName: (format) => `react-realtime-watch.${format}.js`,
     },
     rollupOptions: {
-      external: ["react", "react-dom"],
+      external: ["react", "react-dom", "moment", "moment-timezone"],
       output: {
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
+          moment: "moment",
+          "moment-timezone": "moment.tz",
         },
       },
     },

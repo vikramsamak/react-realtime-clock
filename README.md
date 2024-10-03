@@ -8,6 +8,7 @@
 ## Table of Contents
 
 - [Installation](#installation)
+- [Tailwind CSS Support](#tailwind-css-support)
 - [Usage](#usage)
 - [Props](#props)
 - [Examples](#examples)
@@ -21,6 +22,10 @@ You can install the library using npm or yarn:
 ```bash
   npm install react-realtime-clock
 ```
+
+## Tailwind CSS Support
+
+This library is styled using **Tailwind CSS**. To use the styles as intended, please ensure that Tailwind CSS is installed and configured in your project.
 
 ## Usage
 
