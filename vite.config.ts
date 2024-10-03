@@ -8,7 +8,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, "src/RealTimeClock.tsx"),
       name: "ReactRealTimeWatch",
-      fileName: (format) => `react-realtime-watch.${format}.js`,
+      fileName: (format) => `react-realtime-clock.${format}.js`,
     },
     rollupOptions: {
       external: ["react", "react-dom", "moment", "moment-timezone"],
