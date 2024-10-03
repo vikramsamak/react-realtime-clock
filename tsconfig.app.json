@@ -18,11 +18,8 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-
-    "declaration": true,
-    "declarationDir": "./dist",
-    "outDir": "./dist"
+    "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

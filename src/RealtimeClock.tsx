@@ -1,15 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { cn } from "./lib/utils";
-import { FormatType } from "./types/FormatType";
-import { TimezoneType } from "./types/TimezoneType";
 import moment from "moment-timezone";
-
-interface RealTimeClockProps {
-  containerClassName?: string;
-  clockTextClassName?: string;
-  timeZone?: TimezoneType;
-  format?: FormatType;
-}
+import { RealTimeClockProps } from "./types/Types";
 
 const RealTimeClock: React.FC<RealTimeClockProps> = ({
   containerClassName,

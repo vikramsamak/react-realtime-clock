@@ -1,9 +1,18 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import dts from "vite-plugin-dts";
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    dts({
+      insertTypesEntry: true,
+      outDir: "dist",
+      copyDtsFiles: true,
+      exclude: ["**/*.test.ts", "**/*.test.tsx"],
+    }),
+  ],
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/RealTimeClock.tsx"),
