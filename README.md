@@ -33,7 +33,7 @@ Here’s how to use the `RealTimeClock` component in your application:
 
 ```tsx
 import React from 'react';
-import RealTimeClock from 'react-realtime-watch';
+import { RealTimeClock } from "react-realtime-clock";
 
 const App = () => {
   return (
@@ -70,7 +70,7 @@ A simple example of a clock displaying the current time in UTC:
 
 ```tsx
 import React from 'react';
-import RealTimeClock from 'react-realtime-watch';
+import { RealTimeClock } from "react-realtime-clock";
 
 const App = () => {
   return (
@@ -89,7 +89,7 @@ Customize the appearance of the clock with additional class names:
 
 ```tsx
 import React from 'react';
-import RealTimeClock from 'react-realtime-watch';
+import { RealTimeClock } from "react-realtime-clock";
 
 const App = () => {
   return (
@@ -113,7 +113,7 @@ Display the clock with different time zones dynamically:
 
 ```tsx
 import React, { useState } from 'react';
-import RealTimeClock from 'react-realtime-watch';
+import { RealTimeClock } from "react-realtime-clock";
 
 const App = () => {
   const [timeZone, setTimeZone] = useState("Asia/Kolkata");
@@ -153,7 +153,7 @@ Combine all props for a fully customized clock experience:
 
 ```tsx
 import React from 'react';
-import RealTimeClock from 'react-realtime-watch';
+import { RealTimeClock } from "react-realtime-clock";
 
 const App = () => {
   return (
@@ -222,7 +222,7 @@ You can combine the above customization options for a fully personalized clock d
 
 ```tsx
 import React from 'react';
-import RealTimeClock from 'react-realtime-watch';
+import { RealTimeClock } from "react-realtime-clock";
 
 const App = () => {
   return (
