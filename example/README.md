@@ -3,7 +3,7 @@
 ## Usage Example
 
 ```tsx
-import {RealTimeClock} from 'react-realtime-watch';
+import {RealTimeClock} from 'react-realtime-clock';
 
 const ExampleApp = () => (
   <RealTimeClock
