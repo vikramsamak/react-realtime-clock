@@ -1,10 +1,4 @@
-# React Real-Time Clock Examples
-
-A collection of examples demonstrating how to use the **[react-realtime-clock](https://www.npmjs.com/package/react-realtime-clock)** library to display real-time clocks with customizable formats and time zones.
-
-## Live Demo
-
-Explore the live demo on **[Vercel](https://react-realtime-clock-examples.vercel.app/)**.
+# React Real-Time Clock Example
 
 ## Usage Example
 
