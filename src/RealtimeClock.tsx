@@ -1,39 +1,70 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { cn } from "./lib/utils";
-import moment from "moment-timezone";
+import moment, { Moment } from "moment-timezone";
 import { RealTimeClockProps } from "./types/Types";
+import Clock from "react-clock";
+import "react-clock/dist/Clock.css";
 
 const RealTimeClock: React.FC<RealTimeClockProps> = ({
   containerClassName,
   clockTextClassName,
+  analogClockClassName,
   timeZone = "UTC",
   format = "HH:mm:ss",
+  clockType = "digital",
+  clockSize = 200,
+  renderAnalogClockNumbers = false,
 }) => {
-  const [currentTime, setCurrentTime] = useState<string>(
-    moment.tz(timeZone).format(format)
-  );
+  const [currentTime, setCurrentTime] = useState<Moment>(moment().tz(timeZone));
 
   const updateTime = useCallback(() => {
-    setCurrentTime(moment.tz(timeZone).format(format));
-  }, [timeZone, format]);
+    setCurrentTime(moment().tz(timeZone));
+  }, [timeZone]);
 
   useEffect(() => {
     const interval = setInterval(updateTime, 1000);
-
     return () => clearInterval(interval);
-  }, [timeZone, format, updateTime]);
+  }, [updateTime]);
+
+  const currentDateTimeForAnalog = new Date(
+    currentTime.year(),
+    currentTime.month(),
+    currentTime.date(),
+    currentTime.hours(),
+    currentTime.minutes(),
+    currentTime.seconds()
+  );
+
+  if (clockType === "analog") {
+    return (
+      <div
+        className={cn(
+          "p-4 flex justify-center items-center bg-transparent",
+          containerClassName
+        )}
+      >
+        <Clock
+          value={currentDateTimeForAnalog}
+          size={clockSize}
+          className={cn(
+            "bg-gray-800 border-2 border-gray-400",
+            analogClockClassName
+          )}
+          renderNumbers={renderAnalogClockNumbers}
+        />
+      </div>
+    );
+  }
 
   return (
     <div
       className={cn(
-        "p-4 flex justify-center items-center bg-white rounded-md",
+        "p-4 flex justify-center items-center bg-transparent",
         containerClassName
       )}
     >
-      <span
-        className={cn("text-2xl font-semibold text-black", clockTextClassName)}
-      >
-        {currentTime}
+      <span className={cn("text-2xl font-semibold", clockTextClassName)}>
+        {currentTime.format(format)}
       </span>
     </div>
   );
