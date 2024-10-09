@@ -7,12 +7,12 @@ export default defineConfig({
   plugins: [
     react(),
     dts({
-      include: ['src/**/*.ts', 'src/**/*.tsx'],
+      include: ["src/**/*.ts", "src/**/*.tsx"],
       insertTypesEntry: true,
       outDir: "dist",
       copyDtsFiles: true,
       rollupTypes: true,
-      tsconfigPath: './tsconfig.app.json',
+      tsconfigPath: "./tsconfig.app.json",
       exclude: ["**/*.test.ts", "**/*.test.tsx"],
     }),
   ],
@@ -23,13 +23,20 @@ export default defineConfig({
       fileName: (format) => `react-realtime-clock.${format}.js`,
     },
     rollupOptions: {
-      external: ["react", "react-dom", "moment", "moment-timezone"],
+      external: [
+        "react",
+        "react-dom",
+        "moment",
+        "moment-timezone",
+        "react-clock",
+      ],
       output: {
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
           moment: "moment",
           "moment-timezone": "moment.tz",
+          "react-clock": "Clock",
         },
       },
     },
