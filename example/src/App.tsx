@@ -63,9 +63,11 @@ function App() {
               )}
             </select>
           </div>
-          <div className={`${
+          <div
+            className={`${
               selectedClockType === DIGITAL_CLOCK_TYPE ? "md:w-1/3" : "W-1/2"
-            } w-full `}>
+            } w-full `}
+          >
             <label className="text-lg">Select Time Zone:</label>
             <input
               list="timezones"
