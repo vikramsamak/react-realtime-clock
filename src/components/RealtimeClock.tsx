@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { cn } from "./lib/utils";
+import { cn } from "../lib/utils";
 import moment, { Moment } from "moment-timezone";
-import { RealTimeClockProps } from "./types/Types";
+import { RealTimeClockProps } from "../types/Types";
 import Clock from "react-clock";
 import "react-clock/dist/Clock.css";
 

@@ -13,6 +13,7 @@
 - [Props](#props)
 - [Examples](#examples)
 - [Customization](#customization)
+- [Hooks](#hooks)
 - [License](#license)
 
 ## Installation
@@ -53,12 +54,15 @@ export default App;
 
 ## Props
 
-| Prop                   | Type                | Default        | Description                                                                                   |
-|------------------------|---------------------|----------------|-----------------------------------------------------------------------------------------------|
-| `containerClassName`   | `string`            | `undefined`    | Additional class names for the container element.                                            |
-| `clockTextClassName`   | `string`            | `undefined`    | Additional class names for the clock text element.                                          |
-| `timeZone`             | `TimezoneType`      | `"UTC"`        | Time zone for the clock (e.g., `"America/New_York"`).                                      |
-| `format`               | `FormatType`        | `"HH:mm:ss"`   | Format for displaying the time (e.g., `"hh:mm:ss A"`).                                     |
+| Prop                   | Type                | Default        | Description                                                                                    |
+|------------------------|---------------------|----------------|------------------------------------------------------------------------------------------------|
+| `containerClassName`   | `string`            | `undefined`    | Additional class names for the container element.                                              |
+| `clockTextClassName`   | `string`            | `undefined`    | Additional class names for the clock text element.                                             |
+| `timeZone`             | `TimezoneType`      | `"UTC"`        | Time zone for the clock (e.g., `"America/New_York"`).                                          |
+| `format`               | `FormatType`        | `"HH:mm:ss"`   | Format for displaying the time (e.g., `"hh:mm:ss A"`).                                         |
+| `clockType`            | `typeof DIGITAL_CLOCK_TYPE or typeof ANALOG_CLOCK_TYPE` |`DIGITAL_CLOCK_TYPE`| Specifies whether to display a digital or analog clock. |
+| `clockSize`                   | `number`                                  | `200`                          | Size of the analog clock in pixels.                                                          |
+| `renderAnalogClockNumbers`    | `boolean`                                 | `true`                         | Indicates whether to display numbers on the analog clock.                                   |
 
 ## Examples
 
@@ -147,9 +151,9 @@ const App = () => {
 export default App;
 ```
 
-### Example 4: Full Customization
+### Example 4: Full Customization with Analog Clock
 
-Combine all props for a fully customized clock experience:
+Combine all props for a fully customized analog clock experience:
 
 ```tsx
 import React from 'react';
@@ -163,12 +167,16 @@ const App = () => {
         format="dddd, MMMM Do YYYY, hh:mm A"
         clockTextClassName="text-4xl font-extrabold text-yellow-500"
         containerClassName="flex items-center justify-center h-screen bg-gradient-to-r from-purple-500 to-blue-500"
+        clockType={ANALOG_CLOCK_TYPE}
+        clockSize={250}
+        renderAnalogClockNumbers={true}
       />
     </div>
   );
 };
 
 export default App;
+
 ```
 
 ## Customization
@@ -216,7 +224,21 @@ Example of setting the format to a 12-hour clock:
 <RealTimeClock format="hh:mm:ss A" />
 ```
 
-### 4. Combining Customizations
+### 4. Clock Type
+
+You can set the type of clock to either digital or analog using the clockType prop. You can also control the size of the analog clock using the clockSize prop.
+
+Example of setting the clock to analog:
+
+```tsx
+<RealTimeClock
+  clockType={ANALOG_CLOCK_TYPE}
+  clockSize={200}
+  renderAnalogClockNumbers={true}
+/>
+```
+
+### 5. Combining Customizations
 
 You can combine the above customization options for a fully personalized clock display:
 
@@ -240,7 +262,7 @@ const App = () => {
 export default App;
 ```
 
-### 5. Responsive Design
+### 6. Responsive Design
 
 The component is designed to be responsive. You can use Tailwind CSS utility classes to make it adapt to various screen sizes. For example, using responsive font sizes:
 
@@ -249,6 +271,43 @@ The component is designed to be responsive. You can use Tailwind CSS utility cla
   clockTextClassName="text-xl md:text-3xl lg:text-4xl"
 />
 ```
+
+## Hooks
+
+### `useTimeElapsed`
+
+The `useTimeElapsed` hook is a custom hook that calculates the elapsed time from a specified target date in a specific time zone. It provides the flexibility to start and stop the counting based on provided conditions.
+
+### Example
+
+```tsx
+import { useTimeElapsed } from "react-realtime-clock";
+
+const App = () => {
+  const timeElapsed = useTimeElapsed({
+    targetDate: "2000-02-22T00:00:00Z", 
+    timeZone: "Asia/Kolkata",
+    countingConditions: {
+      startCondition: true,
+      stopCondition: false,  
+    },
+  });
+
+  return <div>{timeElapsed}</div>;
+};
+```
+
+#### Parameters
+
+| Parameter            | Type                                      | Default                         | Description                                                                                   |
+|----------------------|-------------------------------------------|---------------------------------|-----------------------------------------------------------------------------------------------|
+| `targetDate`         | `string or Date`                          | `undefined`                     | The date from which to calculate the elapsed time.                                           |
+| `timeZone`           | `TimezoneType`                            | `"Asia/Kolkata"`               | The time zone in which to calculate the elapsed time.                                       |
+| `countingConditions` | `{ startCondition: boolean, stopCondition: boolean }` | `{ startCondition: false, stopCondition: false }` | An object to control when to start and stop the counting.                                   |
+
+#### Returns
+
+- `string`: A formatted string representing the elapsed time based on the target date and time zone.
 
 ## License
 

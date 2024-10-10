@@ -14,3 +14,12 @@ export interface RealTimeClockProps {
 }
 
 export type ClockType = typeof DIGITAL_CLOCK_TYPE | typeof ANALOG_CLOCK_TYPE;
+
+export interface UseTimeElapsedProps {
+  targetDate: string | Date;
+  timeZone?: TimezoneType;
+  countingConditions?: {
+    startCondition: boolean;
+    stopCondition: boolean;
+  };
+}
