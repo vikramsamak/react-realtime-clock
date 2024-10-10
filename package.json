@@ -1,6 +1,6 @@
 {
   "name": "react-realtime-clock",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "author": "Vikram Samak",
   "description": "A React component for displaying a real-time clock with customizable time zones and formats.",
