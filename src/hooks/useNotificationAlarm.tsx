@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { TimezoneType } from "../types/TimezoneType";
 import moment from "moment-timezone";
+import useTimeElapsed from "./useTimeElapsed";
 
 interface UseNotificationAlarmProps {
   alarmTime: string | Date;
@@ -18,7 +19,14 @@ const useNotificationAlarm = ({
   timeZone = moment.tz.guess(),
 }: UseNotificationAlarmProps) => {
   const [isAlarmTriggered, setIsAlarmTriggered] = useState(false);
+  const [timeStatus, setTimeStatus] = useState<string>("");
   const [initialRender, setInitialRender] = useState(true);
+
+  const elapsedTime = useTimeElapsed({
+    targetDate: alarmTime,
+    timeZone: "Asia/Kolkata",
+    countingConditions: { startCondition: true, stopCondition: false },
+  });
 
   const showNotification = useCallback(() => {
     if (Notification.permission === "granted") {
@@ -41,6 +49,16 @@ const useNotificationAlarm = ({
   const checkAlarmTime = useCallback(() => {
     const currentTime = moment.tz(timeZone);
     const targetTime = moment.tz(alarmTime, timeZone);
+    const diffDuration = moment.duration(targetTime.diff(currentTime));
+
+    if (diffDuration.asSeconds() > 0) {
+      const hours = Math.floor(diffDuration.asHours());
+      const minutes = Math.floor(diffDuration.minutes());
+      const seconds = Math.floor(diffDuration.seconds());
+      setTimeStatus(`Upcoming alert in ${hours}h ${minutes}m ${seconds}s`);
+    } else {
+      setTimeStatus(`Last alert was shown ${elapsedTime} ago`);
+    }
 
     if (
       currentTime.isSame(targetTime, "second") &&
@@ -50,17 +68,27 @@ const useNotificationAlarm = ({
       showNotification();
       setIsAlarmTriggered(true);
     }
-  }, [alarmTime, timeZone, showNotification, isAlarmTriggered, initialRender]);
+  }, [
+    alarmTime,
+    timeZone,
+    showNotification,
+    isAlarmTriggered,
+    initialRender,
+    elapsedTime,
+  ]);
 
   useEffect(() => {
     if (initialRender) {
       setInitialRender(false);
+      return;
     }
-    const interval = setInterval(checkAlarmTime, 1000);
-    return () => clearInterval(interval);
+
+    const intervalId = setInterval(checkAlarmTime, 1000);
+
+    return () => clearInterval(intervalId);
   }, [checkAlarmTime, initialRender]);
 
-  return isAlarmTriggered;
+  return { isAlarmTriggered, timeStatus };
 };
 
 export default useNotificationAlarm;
