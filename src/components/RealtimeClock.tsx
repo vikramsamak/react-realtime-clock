@@ -47,7 +47,7 @@ const RealTimeClock: React.FC<RealTimeClockProps> = ({
           value={currentDateTimeForAnalog}
           size={clockSize}
           className={cn(
-            "bg-gray-800 border-2 border-gray-400",
+            "bg-transparent text-black",
             analogClockClassName
           )}
           renderNumbers={renderAnalogClockNumbers}
