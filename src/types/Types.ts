@@ -23,3 +23,11 @@ export interface UseTimeElapsedProps {
     stopCondition: boolean;
   };
 }
+
+export interface UseNotificationAlarmProps {
+  alarmTime: string | Date;
+  title: string;
+  description?: string;
+  icon?: string;
+  timeZone?: TimezoneType | string;
+}

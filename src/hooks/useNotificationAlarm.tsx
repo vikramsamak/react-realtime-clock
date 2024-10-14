@@ -1,15 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
-import { TimezoneType } from "../types/TimezoneType";
+import { UseNotificationAlarmProps } from "../types/Types";
 import moment from "moment-timezone";
 import useTimeElapsed from "./useTimeElapsed";
-
-interface UseNotificationAlarmProps {
-  alarmTime: string | Date;
-  title: string;
-  description?: string;
-  icon?: string;
-  timeZone?: TimezoneType | string;
-}
 
 const useNotificationAlarm = ({
   alarmTime,
