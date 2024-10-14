@@ -2,6 +2,8 @@ import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
 import useTimeElapsed from "../hooks/useTimeElapsed";
 import { UseTimeElapsedProps } from "../types/Types";
+import { timeZones } from "../constants/Timezones";
+import { TimezoneType } from "../types/TimezoneType";
 
 export default {
   title: "Hooks/useTimeElapsed",
@@ -11,8 +13,10 @@ export default {
       description: "Target date to calculate time elapsed from.",
     },
     timeZone: {
-      control: { type: "text" },
-      description: "The timezone to calculate the elapsed time.",
+      control: {
+        type: "select",
+      },
+      options: timeZones as TimezoneType[],
     },
     countingConditions: {
       control: { type: "object" },

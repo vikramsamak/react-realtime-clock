@@ -2,6 +2,8 @@ import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
 import useNotificationAlarm from "../hooks/useNotificationAlarm";
 import { UseNotificationAlarmProps } from "../types/Types";
+import { timeZones } from "../constants/Timezones";
+import { TimezoneType } from "../types/TimezoneType";
 
 export default {
   title: "Hooks/useNotificationAlarm",
@@ -23,8 +25,10 @@ export default {
       description: "The icon for the notification (optional).",
     },
     timeZone: {
-      control: { type: "text" },
-      description: "The time zone for calculating the alarm.",
+      control: {
+        type: "select",
+      },
+      options: timeZones as TimezoneType[],
     },
   },
 } as Meta;

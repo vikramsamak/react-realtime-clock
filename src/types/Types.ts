@@ -31,3 +31,8 @@ export interface UseNotificationAlarmProps {
   icon?: string;
   timeZone?: TimezoneType | string;
 }
+
+export interface UseCountdownProps {
+  targetDate: Date;
+  timeZone?: TimezoneType | string;
+}
