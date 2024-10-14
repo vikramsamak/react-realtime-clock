@@ -1,6 +1,13 @@
 import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
 import useStopWatch from "../hooks/useStopWatch";
+import {
+  Controls,
+  Description,
+  Primary,
+  Stories,
+  Title,
+} from "@storybook/blocks";
 
 export default {
   title: "Hooks/useStopWatch",
@@ -14,6 +21,20 @@ export default {
       description: "Triggers the reset for the stopwatch",
     },
   },
+  tags: ["autodocs"],
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Description />
+          <Primary />
+          <Controls />
+          <Stories />
+        </>
+      ),
+    },
+  },
 } as Meta;
 
 const HookDisplay: React.FC<{
@@ -22,7 +43,6 @@ const HookDisplay: React.FC<{
 }> = ({ isRunning, resetWatch }) => {
   const { elapsedTime, start, stop, reset } = useStopWatch();
 
-  
   React.useEffect(() => {
     if (isRunning) {
       start();

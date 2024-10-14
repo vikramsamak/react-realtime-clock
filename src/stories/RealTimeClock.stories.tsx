@@ -5,6 +5,13 @@ import { timeZones } from "../constants/Timezones";
 import { RealTimeClockProps } from "../types/Types";
 import { FormatType } from "../types/FormatType";
 import { TimezoneType } from "../types/TimezoneType";
+import {
+  Title,
+  Description,
+  Primary,
+  Controls,
+  Stories,
+} from "@storybook/blocks";
 
 export default {
   title: "Components/RealTimeClock",
@@ -47,6 +54,20 @@ export default {
     analogClockClassName: {
       control: { type: "text" },
       if: { arg: "clockType", eq: "analog" },
+    },
+  },
+  tags: ["autodocs"],
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Description />
+          <Primary />
+          <Controls />
+          <Stories />
+        </>
+      ),
     },
   },
 } as Meta<RealTimeClockProps>;

@@ -4,6 +4,13 @@ import useTimeElapsed from "../hooks/useTimeElapsed";
 import { UseTimeElapsedProps } from "../types/Types";
 import { timeZones } from "../constants/Timezones";
 import { TimezoneType } from "../types/TimezoneType";
+import {
+  Controls,
+  Description,
+  Primary,
+  Stories,
+  Title,
+} from "@storybook/blocks";
 
 export default {
   title: "Hooks/useTimeElapsed",
@@ -21,6 +28,20 @@ export default {
     countingConditions: {
       control: { type: "object" },
       description: "Conditions to control the timer behavior.",
+    },
+  },
+  tags: ["autodocs"],
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Description />
+          <Primary />
+          <Controls />
+          <Stories />
+        </>
+      ),
     },
   },
 } as Meta;

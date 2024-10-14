@@ -4,6 +4,13 @@ import useNotificationAlarm from "../hooks/useNotificationAlarm";
 import { UseNotificationAlarmProps } from "../types/Types";
 import { timeZones } from "../constants/Timezones";
 import { TimezoneType } from "../types/TimezoneType";
+import {
+  Controls,
+  Description,
+  Primary,
+  Stories,
+  Title,
+} from "@storybook/blocks";
 
 export default {
   title: "Hooks/useNotificationAlarm",
@@ -29,6 +36,20 @@ export default {
         type: "select",
       },
       options: timeZones as TimezoneType[],
+    },
+  },
+  tags: ["autodocs"],
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Description />
+          <Primary />
+          <Controls />
+          <Stories />
+        </>
+      ),
     },
   },
 } as Meta;
