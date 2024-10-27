@@ -3,7 +3,7 @@
 ![npm](https://img.shields.io/npm/v/react-realtime-clock)
 ![npm](https://img.shields.io/npm/dw/react-realtime-clock)
 
-**react-realtime-clock** is a simple and customizable React component that displays a real-time clock. With support for multiple time zones and various date formats, it makes it easy to integrate a clock into your React applications.
+A React component library with a real-time clock and essential hooks like useTimeElapsed, useStopWatch, and useCountdown for versatile time-tracking features.
 
 ## Table of Contents
 
