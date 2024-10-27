@@ -4,13 +4,7 @@ import useNotificationAlarm from "../hooks/useNotificationAlarm";
 import { UseNotificationAlarmProps } from "../types/Types";
 import { timeZones } from "../constants/Timezones";
 import { TimezoneType } from "../types/TimezoneType";
-import {
-  Controls,
-  Description,
-  Primary,
-  Stories,
-  Title,
-} from "@storybook/blocks";
+import { Markdown } from "@storybook/blocks";
 
 export default {
   title: "Hooks/useNotificationAlarm",
@@ -43,11 +37,53 @@ export default {
     docs: {
       page: () => (
         <>
-          <Title />
-          <Description />
-          <Primary />
-          <Controls />
-          <Stories />
+          <Markdown>
+            {`
+# \`useNotificationAlarm\` Hook 
+
+The \`useNotificationAlarm\` hook provides a way to set up an alarm notification for a specific \`alarmTime\` with customizable options. It integrates a real-time countdown to the alarm, displays time status messages, and triggers a notification at the designated time. This hook is particularly useful for reminder systems, countdowns, or event notifications.
+
+## Features
+- Displays the time remaining until the alarm in a human-readable format.
+- Sends a browser notification with a customizable title, description, and icon when the alarm time is reached.
+- Automatically adjusts to the user’s time zone or any specified \`timeZone\`.
+
+## Usage
+
+First, import the \`useNotificationAlarm\` hook:
+
+\`\`\`tsx
+import { useNotificationAlarm } from "react-realtime-clock";
+
+const App = () => {
+  const { isAlarmTriggered, timeStatus } = useNotificationAlarm({
+    alarmTime: "2024-12-31T23:59:59Z",
+    title: "New Year's Eve Alert!",
+    description: "Countdown to the new year!",
+    icon: "https://example.com/icon.png",
+    timeZone: "Asia/Kolkata",
+  });
+
+  return (
+    <div>
+      <h3>{timeStatus}</h3>
+      {isAlarmTriggered && <p>Alarm has been triggered!</p>}
+    </div>
+  );
+};
+\`\`\`
+
+## Props
+
+- \`alarmTime\` (*string*): The target date and time to trigger the alarm.
+- \`title\` (*string*): The title of the notification.
+- \`description\` (*string*, optional): The body of the notification.
+- \`icon\` (*string*, optional): The icon URL for the notification.
+- \`timeZone\` (*string*, optional): Specifies the time zone to calculate the alarm time. Defaults to the user's local time zone.
+
+When the specified \`alarmTime\` is reached, a notification will display with the \`title\`, \`description\`, and optional \`icon\`.
+`}
+          </Markdown>
         </>
       ),
     },
@@ -93,4 +129,11 @@ Default.args = {
   title: "Reminder",
   description: "This is your alarm notification.",
   timeZone: "Asia/Kolkata",
+};
+Default.parameters = {
+  docs: {
+    source: {
+      code: false,
+    },
+  },
 };

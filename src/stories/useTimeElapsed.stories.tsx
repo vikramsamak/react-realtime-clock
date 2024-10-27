@@ -4,13 +4,7 @@ import useTimeElapsed from "../hooks/useTimeElapsed";
 import { UseTimeElapsedProps } from "../types/Types";
 import { timeZones } from "../constants/Timezones";
 import { TimezoneType } from "../types/TimezoneType";
-import {
-  Controls,
-  Description,
-  Primary,
-  Stories,
-  Title,
-} from "@storybook/blocks";
+import { Markdown } from "@storybook/blocks";
 
 export default {
   title: "Hooks/useTimeElapsed",
@@ -20,9 +14,7 @@ export default {
       description: "Target date to calculate time elapsed from.",
     },
     timeZone: {
-      control: {
-        type: "select",
-      },
+      control: { type: "select" },
       options: timeZones as TimezoneType[],
     },
     countingConditions: {
@@ -35,11 +27,48 @@ export default {
     docs: {
       page: () => (
         <>
-          <Title />
-          <Description />
-          <Primary />
-          <Controls />
-          <Stories />
+          <Markdown>
+            {`
+# \`useTimeElapsed\` Hook
+
+The \`useTimeElapsed\` hook calculates the time elapsed since a specified \`targetDate\`, updating every second. It supports custom time zones and can be controlled through counting conditions, making it suitable for timers and elapsed time displays.
+
+## Features
+- Calculates the elapsed time from a specific date.
+- Supports custom time zones for accurate time tracking.
+- Allows starting and stopping the timer using conditions.
+
+## Usage
+
+To use the \`useTimeElapsed\` hook, import it into your component:
+
+\`\`\`tsx
+import { useTimeElapsed } from "react-realtime-clock";
+
+const App = () => {
+  const targetDate = new Date("2023-01-01T00:00:00Z"); // Example target date
+  const timeElapsed = useTimeElapsed({
+    targetDate,
+    timeZone: "Asia/Kolkata",
+    countingConditions: { startCondition: true, stopCondition: false },
+  });
+
+  return <div>Elapsed Time: {timeElapsed}</div>;
+};
+\`\`\`
+
+## Hook API
+
+- \`targetDate\` (*Date*): The date from which to calculate elapsed time.
+- \`timeZone\` (*string*): The time zone to use for the calculation (default is "Asia/Kolkata").
+- \`countingConditions\` (*object*): 
+  - \`startCondition\` (*boolean*): Whether to start counting.
+  - \`stopCondition\` (*boolean*): Whether to stop counting.
+- \`return\` (*string*): The formatted elapsed time as a string.
+
+This hook is ideal for tracking time elapsed since specific events, deadlines, or for any application requiring elapsed time functionality.
+`}
+          </Markdown>
         </>
       ),
     },
@@ -78,4 +107,12 @@ Default.args = {
   targetDate: oneYearAgo,
   timeZone: "Asia/Kolkata",
   countingConditions: { startCondition: true, stopCondition: false },
+};
+
+Default.parameters = {
+  docs: {
+    source: {
+      code: false,
+    },
+  },
 };

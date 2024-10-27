@@ -1,13 +1,7 @@
 import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
 import useStopWatch from "../hooks/useStopWatch";
-import {
-  Controls,
-  Description,
-  Primary,
-  Stories,
-  Title,
-} from "@storybook/blocks";
+import { Markdown } from "@storybook/blocks";
 
 export default {
   title: "Hooks/useStopWatch",
@@ -26,11 +20,49 @@ export default {
     docs: {
       page: () => (
         <>
-          <Title />
-          <Description />
-          <Primary />
-          <Controls />
-          <Stories />
+          <Markdown>
+            {`
+# \`useStopWatch\` Hook
+
+The \`useStopWatch\` hook provides an easy-to-use stopwatch with start, stop, and reset functionality, tracking elapsed time in seconds. It is ideal for time-tracking tasks or any application that requires a simple stopwatch.
+
+## Features
+- **Start**: Begins counting elapsed time.
+- **Stop**: Pauses the stopwatch, preserving the current elapsed time.
+- **Reset**: Resets the elapsed time to zero.
+
+## Usage
+
+First, import the \`useStopWatch\` hook:
+
+\`\`\`tsx
+import { useStopWatch } from "react-realtime-clock";
+
+const App = () => {
+  const { elapsedTime, isRunning, start, stop, reset } = useStopWatch();
+
+  return (
+    <div>
+      <h3>Elapsed Time: {elapsedTime.toFixed(0)} seconds</h3>
+      <button onClick={start} disabled={isRunning}>Start</button>
+      <button onClick={stop} disabled={!isRunning}>Stop</button>
+      <button onClick={reset}>Reset</button>
+    </div>
+  );
+};
+\`\`\`
+
+## Hook API
+
+- \`elapsedTime\` (*number*): The time elapsed in seconds.
+- \`isRunning\` (*boolean*): Indicates whether the stopwatch is currently running.
+- \`start\` (*function*): Starts the stopwatch.
+- \`stop\` (*function*): Stops the stopwatch.
+- \`reset\` (*function*): Resets the elapsed time to zero.
+
+This hook is versatile for any stopwatch use case, providing a straightforward way to manage and display time elapsed.
+`}
+          </Markdown>
         </>
       ),
     },
@@ -75,4 +107,11 @@ export const Default = Template.bind({});
 Default.args = {
   isRunning: false,
   resetWatch: false,
+};
+Default.parameters = {
+  docs: {
+    source: {
+      code: false,
+    },
+  },
 };

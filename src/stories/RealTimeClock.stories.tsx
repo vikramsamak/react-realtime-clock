@@ -5,13 +5,7 @@ import { timeZones } from "../constants/Timezones";
 import { RealTimeClockProps } from "../types/Types";
 import { FormatType } from "../types/FormatType";
 import { TimezoneType } from "../types/TimezoneType";
-import {
-  Title,
-  Description,
-  Primary,
-  Controls,
-  Stories,
-} from "@storybook/blocks";
+import { Markdown } from "@storybook/blocks";
 
 export default {
   title: "Components/RealTimeClock",
@@ -61,11 +55,53 @@ export default {
     docs: {
       page: () => (
         <>
-          <Title />
-          <Description />
-          <Primary />
-          <Controls />
-          <Stories />
+          <Markdown>
+            {`
+# \`RealTimeClock\` Component
+
+The \`RealTimeClock\` component displays the current time in either a digital or analog format, updated every second. It supports different time zones and customizable styles, making it suitable for various applications requiring real-time clock functionality.
+
+## Features
+- Displays current time in digital or analog format.
+- Supports customizable time zones.
+- Allows customization of clock size and appearance.
+- Updates every second to provide real-time information.
+
+## Usage
+
+To use the \`RealTimeClock\` component in your application, import it and provide the necessary props:
+
+\`\`\`tsx
+import { RealTimeClock } from "react-realtime-clock";
+
+const App = () => {
+  return (
+    <div>
+      <RealTimeClock
+        timeZone="Asia/Kolkata"
+        format="hh:mm:ss A"
+        clockType="digital"
+        clockSize={250}
+      />
+    </div>
+  );
+};
+\`\`\`
+
+## Props
+
+- \`containerClassName\` (*string*): Additional classes for the container.
+- \`clockTextClassName\` (*string*): Additional classes for the clock text.
+- \`analogClockClassName\` (*string*): Additional classes for the analog clock.
+- \`timeZone\` (*string*): The time zone for the clock (default is "UTC").
+- \`format\` (*string*): Format for the digital clock display (default is "HH:mm:ss").
+- \`clockType\` (*string*): Type of clock to display ("digital" or "analog", default is "digital").
+- \`clockSize\` (*number*): Size of the analog clock in pixels (default is 200).
+- \`renderAnalogClockNumbers\` (*boolean*): Whether to render numbers on the analog clock (default is false).
+
+This component is perfect for applications that require a reliable and visually appealing display of real-time information.
+`}
+          </Markdown>
         </>
       ),
     },

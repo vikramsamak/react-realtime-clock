@@ -3,13 +3,7 @@ import useCountdown from "../hooks/useCountDown";
 import { UseCountdownProps } from "../types/Types";
 import { timeZones } from "../constants/Timezones";
 import { TimezoneType } from "../types/TimezoneType";
-import {
-  Controls,
-  Description,
-  Primary,
-  Stories,
-  Title,
-} from "@storybook/blocks";
+import { Markdown } from "@storybook/blocks";
 
 export default {
   title: "Hooks/useCountdown",
@@ -30,11 +24,32 @@ export default {
     docs: {
       page: () => (
         <>
-          <Title />
-          <Description />
-          <Primary />
-          <Controls />
-          <Stories />
+          <Markdown>
+            {`
+# \`useCountdown\` Hook 
+
+The \`useCountdown\` hook calculates the time remaining until a specified \`targetDate\`, updating every second. It supports custom time zones, making it perfect for countdown timers that need to display the remaining time for events, deadlines, or other time-based tasks. 
+
+## Usage
+
+To use \`useCountdown\`, import it into your project:
+
+\`\`\`tsx
+import { useCountdown } from "react-realtime-clock";
+
+const App = () => {
+  const timeRemaining = useCountdown({
+    targetDate: "2024-12-31T23:59:59Z", 
+    timeZone: "Asia/Kolkata"
+  });
+
+  return <div>{timeRemaining}</div>;
+};
+\`\`\`
+
+In this example, the \`timeRemaining\` variable will display the time left until the specified \`targetDate\` in the desired \`timeZone\`.
+`}
+          </Markdown>
         </>
       ),
     },
@@ -64,4 +79,11 @@ export const Default = Template.bind({});
 Default.args = {
   targetDate: oneMinuteLater,
   timeZone: "Asia/Kolkata",
+};
+Default.parameters = {
+  docs: {
+    source: {
+      code: false,
+    },
+  },
 };
