@@ -1,18 +1,22 @@
 import { useState, useEffect, useCallback } from "react";
-import { UseTimeElapsedProps } from "../types/Types";
+import { TimeElapsedObject, UseTimeElapsedProps } from "../types/Types";
+import { INDIAN_STANDARD_TIMEZONE, STRING_RETURN_TYPE } from "../constants/Constants";
 import preciseDiff from "../helpers/getpreciseDiff";
 
 const useTimeElapsed = ({
   targetDate,
-  timeZone = "Asia/Kolkata",
+  timeZone = INDIAN_STANDARD_TIMEZONE,
   countingConditions = { startCondition: false, stopCondition: false },
-}: UseTimeElapsedProps): string => {
-  const [timeElapsed, setTimeElapsed] = useState<string>("");
+  returnType = STRING_RETURN_TYPE,
+}: UseTimeElapsedProps): string | TimeElapsedObject => {
+  const [timeElapsed, setTimeElapsed] = useState<string | TimeElapsedObject>(
+    ""
+  );
 
   const updateElapsedTime = useCallback(() => {
-    const duration = preciseDiff(targetDate, timeZone);
+    const duration = preciseDiff(targetDate, timeZone, returnType);
     setTimeElapsed(duration);
-  }, [targetDate, timeZone]);
+  }, [targetDate, timeZone, returnType]);
 
   useEffect(() => {
     if (

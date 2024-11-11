@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { UseNotificationAlarmProps } from "../types/Types";
+import { INDIAN_STANDARD_TIMEZONE } from "../constants/Constants";
 import moment from "moment-timezone";
 import useTimeElapsed from "./useTimeElapsed";
 
@@ -16,7 +17,7 @@ const useNotificationAlarm = ({
 
   const elapsedTime = useTimeElapsed({
     targetDate: alarmTime,
-    timeZone: "Asia/Kolkata",
+    timeZone: INDIAN_STANDARD_TIMEZONE,
     countingConditions: { startCondition: true, stopCondition: false },
   });
 

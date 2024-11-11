@@ -1,7 +1,13 @@
 import moment from "moment-timezone";
 import { TimezoneType } from "../types/TimezoneType";
+import { UseTimeElapsedReturnType } from "../types/Types";
+import { STRING_RETURN_TYPE } from "../constants/Constants";
 
-function preciseDiff(targetDate: string | Date, timeZone: TimezoneType) {
+function preciseDiff(
+  targetDate: string | Date,
+  timeZone: TimezoneType,
+  returnType: UseTimeElapsedReturnType = "string"
+) {
   const now = moment.tz(timeZone);
   const parsedDate = moment.tz(targetDate, timeZone);
 
@@ -30,7 +36,18 @@ function preciseDiff(targetDate: string | Date, timeZone: TimezoneType) {
   if (minutes > 0) result += `${minutes} minutes `;
   if (seconds > 0) result += `${seconds} seconds`;
 
-  return result.trim();
+  if (returnType === STRING_RETURN_TYPE) {
+    return result.trim();
+  } else {
+    return {
+      years,
+      months,
+      days,
+      hours,
+      minutes,
+      seconds,
+    };
+  }
 }
 
 export default preciseDiff;

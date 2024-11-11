@@ -1,10 +1,11 @@
 import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
-import useTimeElapsed from "../hooks/useTimeElapsed";
 import { UseTimeElapsedProps } from "../types/Types";
 import { timeZones } from "../constants/Timezones";
 import { TimezoneType } from "../types/TimezoneType";
 import { Markdown } from "@storybook/blocks";
+import { OBJECT_RETURN_TYPE, STRING_RETURN_TYPE } from "../constants/Constants";
+import useTimeElapsed from "../hooks/useTimeElapsed";
 
 export default {
   title: "Hooks/useTimeElapsed",
@@ -20,6 +21,10 @@ export default {
     countingConditions: {
       control: { type: "object" },
       description: "Conditions to control the timer behavior.",
+    },
+    returnType: {
+      control: { type: "select" },
+      options: [STRING_RETURN_TYPE, OBJECT_RETURN_TYPE],
     },
   },
   tags: ["autodocs"],
@@ -37,6 +42,7 @@ The \`useTimeElapsed\` hook calculates the time elapsed since a specified \`targ
 - Calculates the elapsed time from a specific date.
 - Supports custom time zones for accurate time tracking.
 - Allows starting and stopping the timer using conditions.
+- Offers flexibility in the format of the elapsed time through the \`returnType\` option.
 
 ## Usage
 
@@ -51,6 +57,7 @@ const App = () => {
     targetDate,
     timeZone: "Asia/Kolkata",
     countingConditions: { startCondition: true, stopCondition: false },
+    returnType: "string", // Optionally specify the return type here
   });
 
   return <div>Elapsed Time: {timeElapsed}</div>;
@@ -64,7 +71,9 @@ const App = () => {
 - \`countingConditions\` (*object*): 
   - \`startCondition\` (*boolean*): Whether to start counting.
   - \`stopCondition\` (*boolean*): Whether to stop counting.
-- \`return\` (*string*): The formatted elapsed time as a string.
+- \`returnType\` (*string*): Determines the format of the elapsed time. 
+  - \`"string"\`: Returns the elapsed time as a formatted string (e.g., "1 year 2 months 3 days").
+  - \`"object"\`: Returns the elapsed time as an object containing units like days, hours, minutes, etc. (e.g., \`{ days: 365, hours: 5, minutes: 30 }\`).
 
 This hook is ideal for tracking time elapsed since specific events, deadlines, or for any application requiring elapsed time functionality.
 `}
@@ -79,16 +88,31 @@ const HookDisplay: React.FC<UseTimeElapsedProps> = ({
   targetDate,
   timeZone,
   countingConditions,
+  returnType,
 }) => {
   const timeElapsed = useTimeElapsed({
     targetDate,
     timeZone,
     countingConditions,
+    returnType,
   });
 
   return (
     <div>
-      <h3>Elapsed Time: {timeElapsed}</h3>
+      <h3>
+        Elapsed Time:{" "}
+        {typeof timeElapsed === "string" ? (
+          timeElapsed
+        ) : (
+          <span>
+            {Object.entries(timeElapsed).map(([key, value]) => (
+              <span key={key}>
+                {key}: {value}{" "}
+              </span>
+            ))}
+          </span>
+        )}
+      </h3>
       <p>Target Date: {new Date(targetDate).toString()}</p>
       <p>Timezone: {timeZone}</p>
     </div>
